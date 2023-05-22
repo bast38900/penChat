@@ -5,7 +5,10 @@ import React, {FC} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {AuthForm} from '../components';
 import firestore from '@react-native-firebase/firestore';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
 /**
@@ -51,12 +54,12 @@ export const SignInScreen: FC<SigninScreenProps> = props => {
 
   return (
     <View style={styles.container}>
-      <AuthForm
-        headerText="Sign in to your account"
-        buttonTitle="Sign in"
-        onSubmit={''}
+      <GoogleSigninButton
+        style={{width: 212, height: 48}}
+        size={GoogleSigninButton.Size.Wide}
+        color={GoogleSigninButton.Color.Dark}
+        onPress={onGoogleButtonPress}
       />
-      <Button title="Google Sign-In" onPress={() => onGoogleButtonPress()} />
     </View>
   );
 };
