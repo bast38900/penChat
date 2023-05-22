@@ -2,8 +2,7 @@
  * Screen for login in to application
  */
 import React, {FC} from 'react';
-import {Button, StyleSheet, View} from 'react-native';
-import {AuthForm} from '../components';
+import {StyleSheet, View} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {
   GoogleSignin,
