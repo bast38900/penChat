@@ -58,7 +58,8 @@ export const ChatRoomScreen: FC<ChatRoomScreenProps> = props => {
   useEffect(() => {
     const subscriber = firestore()
       .collection('messages')
-      .limit(3)
+      .orderBy('date', 'desc')
+      .limit(5)
       .onSnapshot(querySnapshot => {
         const conversations = [];
 
@@ -83,6 +84,7 @@ export const ChatRoomScreen: FC<ChatRoomScreenProps> = props => {
       .add({
         name: user?.displayName,
         text: message,
+        date: firestore.Timestamp.now.toString(),
       })
       .then(() => {
         console.log('messages send');
