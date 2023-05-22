@@ -1,12 +1,13 @@
 import {
   Button,
   FlatList,
+  Keyboard,
   SafeAreaView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-import React, {FC, useEffect, useLayoutEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {sharedStyles, Colors} from '../assets/styles';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -79,6 +80,8 @@ export const ChatRoomScreen: FC<ChatRoomScreenProps> = props => {
   }, []);
 
   const sendMessage = async () => {
+    Keyboard.dismiss();
+
     firestore()
       .collection('messages')
       .add({
@@ -111,6 +114,7 @@ export const ChatRoomScreen: FC<ChatRoomScreenProps> = props => {
           )}
         />
         <TextInput
+          style={styles.messageInputField}
           placeholder="Send Message"
           value={message}
           onChangeText={text => setMessage(text)}></TextInput>
@@ -123,4 +127,15 @@ export const ChatRoomScreen: FC<ChatRoomScreenProps> = props => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  messageInputField: {
+    fontWeight: '300',
+    borderWidth: 1,
+    borderColor: Colors.white,
+    backgroundColor: Colors.white,
+    padding: 8,
+    borderRadius: 5,
+    marginTop: 8,
+    fontSize: 16,
+  },
+});
