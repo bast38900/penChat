@@ -1,7 +1,7 @@
 /**
  * Screen for login in to application
  */
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {AuthForm} from '../components';
 
@@ -13,7 +13,14 @@ import auth from '@react-native-firebase/auth';
  */
 interface SigninScreenProps {}
 
-// TODO: Change this function to work with API
+/**
+ * Set webclient id to firebase app
+ */
+GoogleSignin.configure({
+  webClientId:
+    '176478441703-3ntq32ecmabh3o7d6bmqivtcr1p5qfpa.apps.googleusercontent.com',
+});
+
 /**
  * Perform Sign In
  */
@@ -27,10 +34,12 @@ async function onGoogleButtonPress() {
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
   // Sign-in the user with the credential
-  return auth().signInWithCredential(googleCredential);
+  return auth()
+    .signInWithCredential(googleCredential)
+    .then(() => console.log('User signed in with Google!'));
 }
 
-export const SigninScreen: FC<SigninScreenProps> = props => {
+export const SignInScreen: FC<SigninScreenProps> = props => {
   const {} = props;
 
   return (
@@ -40,14 +49,7 @@ export const SigninScreen: FC<SigninScreenProps> = props => {
         buttonTitle="Sign in"
         onSubmit={''}
       />
-      <Button
-        title="Google Sign-In"
-        onPress={() =>
-          onGoogleButtonPress().then(() =>
-            console.log('Signed in with Google!'),
-          )
-        }
-      />
+      <Button title="Google Sign-In" onPress={() => onGoogleButtonPress()} />
     </View>
   );
 };

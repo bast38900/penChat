@@ -1,27 +1,35 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {SigninScreen} from './app/screens';
 import SplashScreen from 'react-native-splash-screen';
-import {useEffect} from 'react';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {useEffect, useState} from 'react';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {AppNavigator, AuthNavigator} from './app/navigation';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [loading, setLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+
   useEffect(() => {
     SplashScreen.hide();
 
-    GoogleSignin.configure({
-      webClientId:
-        '176478441703-3ntq32ecmabh3o7d6bmqivtcr1p5qfpa.apps.googleusercontent.com',
+    auth().onAuthStateChanged(userState => {
+      setUser(userState);
+
+      if (loading) {
+        setLoading(false);
+      }
     });
   }, []);
 
+  // For testing purposes only
+  if (user) console.log('User: ' + user?.displayName);
+  else console.log('No user found');
+
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="SignIn" component={SigninScreen} />
-      </Stack.Navigator>
+      {!user ? <AuthNavigator /> : <AppNavigator />}
     </NavigationContainer>
   );
 }
