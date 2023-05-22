@@ -4,7 +4,7 @@
 import React, {FC} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {AuthForm} from '../components';
-
+import firestore from '@react-native-firebase/firestore';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 
@@ -28,10 +28,17 @@ async function onGoogleButtonPress() {
   // Check if your device supports Google Play
   await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
   // Get the users ID token
-  const {idToken} = await GoogleSignin.signIn();
+  const {idToken, user} = await GoogleSignin.signIn();
 
   // Create a Google credential with the token
   const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+  // Add user to firestore
+  firestore().collection('users').doc(user.id).set({
+    name: user.name,
+    email: user.email,
+    id: user.id,
+  });
 
   // Sign-in the user with the credential
   return auth()
