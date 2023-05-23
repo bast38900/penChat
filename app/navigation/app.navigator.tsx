@@ -6,6 +6,15 @@ import {Colors} from '../assets/styles';
 const Stack = createStackNavigator();
 
 /**
+ * Fade effect used by Navigator
+ */
+const forFade = ({current}: StackCardInterpolationProps) => ({
+  cardStyle: {
+    opacity: current.progress,
+  },
+});
+
+/**
  * Stack for signed in users.
  */
 export const AppNavigator = () => {
@@ -16,7 +25,11 @@ export const AppNavigator = () => {
         headerTitleStyle: {fontSize: 24},
         headerTitleAlign: 'center',
       }}>
-      <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoomScreen}
+        options={{cardStyleInterpolator: forFade}}
+      />
     </Stack.Navigator>
   );
 };

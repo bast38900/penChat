@@ -12,7 +12,9 @@ export default function App() {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 
   useEffect(() => {
-    SplashScreen.hide();
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 3000);
 
     auth().onAuthStateChanged(userState => {
       setUser(userState);

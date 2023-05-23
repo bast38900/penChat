@@ -5,6 +5,15 @@ import {SignInScreen} from '../screens';
 const Stack = createStackNavigator();
 
 /**
+ * Fade effect used by Navigator
+ */
+const forFade = ({current}: StackCardInterpolationProps) => ({
+  cardStyle: {
+    opacity: current.progress,
+  },
+});
+
+/**
  * Stack for not signed in users.
  */
 export const AuthNavigator = () => {
@@ -12,7 +21,11 @@ export const AuthNavigator = () => {
     <Stack.Navigator
       initialRouteName="SignIn"
       screenOptions={{headerShown: false}}>
-      <Stack.Screen name="SignIn" component={SignInScreen} />
+      <Stack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{cardStyleInterpolator: forFade}}
+      />
     </Stack.Navigator>
   );
 };
