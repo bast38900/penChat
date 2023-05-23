@@ -7,7 +7,7 @@ import {ChatRoomScreen} from '../screens/';
 import {Colors} from '../assets/styles';
 import {AppStackNavigatorParamList} from '../navigation/';
 
-const AppStack = createStackNavigator<AppStackNavigatorParamList>();
+const Stack = createStackNavigator<AppStackNavigatorParamList>();
 
 /**
  * Fade effect used by Navigator
@@ -23,17 +23,17 @@ const forFade = ({current}: StackCardInterpolationProps) => ({
  */
 export const AppNavigator = () => {
   return (
-    <AppStack.Navigator
+    <Stack.Navigator
       screenOptions={{
         headerStyle: {backgroundColor: Colors.blue},
         headerTitleStyle: {fontSize: 24},
         headerTitleAlign: 'center',
       }}>
-      <AppStack.Screen
+      <Stack.Screen
         name="ChatRoom"
         component={ChatRoomScreen}
         options={{cardStyleInterpolator: forFade}}
       />
-    </AppStack.Navigator>
+    </Stack.Navigator>
   );
 };
