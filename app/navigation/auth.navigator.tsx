@@ -1,8 +1,12 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  StackCardInterpolationProps,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import {SignInScreen} from '../screens';
+import {AuthStackNavigatorParamList} from '../navigation/';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<AuthStackNavigatorParamList>();
 
 /**
  * Fade effect used by Navigator
