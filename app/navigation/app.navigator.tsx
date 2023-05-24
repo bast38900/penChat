@@ -3,7 +3,7 @@ import {
   StackCardInterpolationProps,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {ChatRoomScreen} from '../screens/';
+import {ChatRoomScreen, HomeScreen} from '../screens/';
 import {Colors} from '../assets/styles';
 import {AppStackNavigatorParamList} from '../navigation/';
 
@@ -24,11 +24,17 @@ const forFade = ({current}: StackCardInterpolationProps) => ({
 export const AppNavigator = () => {
   return (
     <Stack.Navigator
+      initialRouteName="Home"
       screenOptions={{
         headerStyle: {backgroundColor: Colors.blue},
         headerTitleStyle: {fontSize: 24},
         headerTitleAlign: 'center',
       }}>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{cardStyleInterpolator: forFade, headerTitle: 'penChat'}}
+      />
       <Stack.Screen
         name="ChatRoom"
         component={ChatRoomScreen}
