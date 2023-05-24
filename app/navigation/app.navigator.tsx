@@ -1,4 +1,3 @@
-import {Alert} from 'react-native';
 import React from 'react';
 import {
   StackCardInterpolationProps,
@@ -8,6 +7,7 @@ import {ChatRoomScreen, HomeScreen, AddRoomScreen} from '../screens/';
 import {Colors} from '../assets/styles';
 import {AppStackParamList} from '../navigation/';
 import {IconButton} from 'react-native-paper';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createStackNavigator<AppStackParamList>();
 
@@ -21,6 +21,15 @@ const forFade = ({current}: StackCardInterpolationProps) => ({
 });
 
 /**
+ * Perform Sign Out
+ */
+async function onGoogleButtonPress() {
+  auth()
+    .signOut()
+    .then(() => console.log('User signed out!'));
+}
+
+/**
  * Stack for signed in users.
  */
 export const AppNavigator = () => {
@@ -29,7 +38,7 @@ export const AppNavigator = () => {
       initialRouteName="Home"
       screenOptions={{
         headerStyle: {backgroundColor: Colors.blue},
-        headerTitleStyle: {fontSize: 24},
+        headerTitleStyle: {fontSize: 24, color: Colors.white},
         headerTitleAlign: 'center',
       }}>
       <Stack.Screen
@@ -42,6 +51,14 @@ export const AppNavigator = () => {
               size={28}
               iconColor="#ffffff"
               onPress={() => navigation.navigate('AddRoom')}
+            />
+          ),
+          headerLeft: () => (
+            <IconButton
+              icon="logout"
+              size={28}
+              iconColor="#ffffff"
+              onPress={onGoogleButtonPress}
             />
           ),
           presentation: 'modal',

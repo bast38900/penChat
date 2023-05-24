@@ -1,25 +1,55 @@
-import {SafeAreaView, StyleSheet, View} from 'react-native';
-import React, {FC} from 'react';
+import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
+import React, {FC, useState, useEffect} from 'react';
 import {sharedStyles, Colors} from '../assets/styles';
-import auth from '@react-native-firebase/auth';
 import {Button} from '../components';
 import {AppStackScreenProps} from '../navigation/navigation.types';
+import firestore from '@react-native-firebase/firestore';
+import {Divider, List} from 'react-native-paper';
 
-/**
- * Perform Sign Out
- */
-async function onGoogleButtonPress() {
-  auth()
-    .signOut()
-    .then(() => console.log('User signed out!'));
-}
+export const HomeScreen: FC<AppStackScreenProps<'Home'>> = ({navigation}) => {
+  const [threads, setThreads] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-export const HomeScreen: React.FC<AppStackScreenProps<'Home'>> = ({
-  navigation,
-}) => {
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('THREADS')
+      .onSnapshot(querySnapshot => {
+        const threads = querySnapshot.docs.map(documentSnapshot => {
+          return {
+            _id: documentSnapshot.id,
+            // give defaults
+            name: '',
+            ...documentSnapshot.data(),
+          };
+        });
+
+        setThreads(threads);
+
+        setLoading(false);
+      });
+
+    // Unsubscribe from events when no longer in use
+    return () => subscriber();
+  }, []);
+
   return (
     <SafeAreaView style={sharedStyles.container}>
-      <View style={{marginTop: 50}}>
+      <View>
+        <FlatList
+          data={threads}
+          keyExtractor={item => item._id}
+          ItemSeparatorComponent={() => <Divider />}
+          renderItem={({item}) => (
+            <List.Item
+              title={item.name}
+              description="Item description"
+              titleNumberOfLines={1}
+              titleStyle={styles.listTitle}
+              descriptionStyle={styles.listDescription}
+              descriptionNumberOfLines={1}
+            />
+          )}
+        />
         <Button
           style={styles.ButtonStyle}
           title={'Add New Room'}
@@ -30,7 +60,6 @@ export const HomeScreen: React.FC<AppStackScreenProps<'Home'>> = ({
             fontWeight: '700',
           }}
         />
-        <Button title="Google Sign-Out" onPress={() => onGoogleButtonPress()} />
       </View>
     </SafeAreaView>
   );

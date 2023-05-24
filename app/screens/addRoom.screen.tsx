@@ -4,11 +4,25 @@ import {Button, TextFormInput} from '../components';
 import {AppStackScreenProps} from '../navigation/navigation.types';
 import {IconButton, Title} from 'react-native-paper';
 import {sharedStyles, Colors} from '../assets/styles';
+import firestore from '@react-native-firebase/firestore';
 
-export const AddRoomScreen: React.FC<AppStackScreenProps<'AddRoom'>> = ({
+export const AddRoomScreen: FC<AppStackScreenProps<'AddRoom'>> = ({
   navigation,
 }) => {
   const [roomName, setRoomName] = useState('');
+
+  async function handleButtonPress() {
+    if (roomName.length > 0) {
+      firestore()
+        .collection('THREADS')
+        .add({
+          name: roomName,
+        })
+        .then(() => {
+          navigation.navigate('Home');
+        });
+    }
+  }
 
   return (
     <SafeAreaView style={sharedStyles.container}>
@@ -30,7 +44,7 @@ export const AddRoomScreen: React.FC<AppStackScreenProps<'AddRoom'>> = ({
         <Button
           style={styles.ButtonStyle}
           title={'Add Room'}
-          onPress={() => navigation.goBack()}
+          onPress={handleButtonPress}
           disabled={roomName.length === 0}
           textStyle={{
             color: Colors.white,

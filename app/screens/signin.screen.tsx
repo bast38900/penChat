@@ -44,7 +44,7 @@ async function onGoogleButtonPress() {
     .then(() => console.log('User signed in with Google!'));
 }
 
-export const SignInScreen: React.FC<AuthStackScreenProps<'SignIn'>> = () => {
+export const SignInScreen: FC<AuthStackScreenProps<'SignIn'>> = () => {
   return (
     <View style={styles.container}>
       <GoogleSigninButton
