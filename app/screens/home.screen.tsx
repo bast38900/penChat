@@ -1,4 +1,10 @@
-import {FlatList, SafeAreaView, StyleSheet, View} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {FC, useState, useEffect} from 'react';
 import {sharedStyles, Colors} from '../assets/styles';
 import {Button} from '../components';
@@ -40,14 +46,17 @@ export const HomeScreen: FC<AppStackScreenProps<'Home'>> = ({navigation}) => {
           keyExtractor={item => item._id}
           ItemSeparatorComponent={() => <Divider />}
           renderItem={({item}) => (
-            <List.Item
-              title={item.name}
-              description="Item description"
-              titleNumberOfLines={1}
-              titleStyle={styles.listTitle}
-              descriptionStyle={styles.listDescription}
-              descriptionNumberOfLines={1}
-            />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ChatRoom', {thread: item})}>
+              <List.Item
+                title={item.name}
+                description="Item description"
+                titleNumberOfLines={1}
+                titleStyle={styles.listTitle}
+                descriptionStyle={styles.listDescription}
+                descriptionNumberOfLines={1}
+              />
+            </TouchableOpacity>
           )}
         />
         <Button

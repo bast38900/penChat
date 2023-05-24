@@ -40,6 +40,7 @@ export const AppNavigator = () => {
         headerStyle: {backgroundColor: Colors.blue},
         headerTitleStyle: {fontSize: 24, color: Colors.white},
         headerTitleAlign: 'center',
+        headerTintColor: Colors.auqa,
       }}>
       <Stack.Screen
         name="Home"
@@ -71,7 +72,13 @@ export const AppNavigator = () => {
         component={AddRoomScreen}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoomScreen}
+        options={({route}) => ({
+          title: route.params.thread.name,
+        })}
+      />
     </Stack.Navigator>
   );
 };

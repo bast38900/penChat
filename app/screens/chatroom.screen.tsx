@@ -1,24 +1,39 @@
-import {
-  Button,
-  FlatList,
-  Keyboard,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import React, {FC, useEffect, useState} from 'react';
-import {sharedStyles, Colors} from '../assets/styles';
+import {sharedStyles} from '../assets/styles';
+import {AppStackScreenProps} from '../navigation/navigation.types';
+import {GiftedChat} from 'react-native-gifted-chat';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {TextInput} from 'react-native-gesture-handler';
-import {AppStackScreenProps} from '../navigation/navigation.types';
 
-export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = () => {
+export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = ({
+  route,
+}) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
-  const [message, setMessage] = useState('');
-  const [conversations, setConversation] = useState([]);
+  const {thread} = route.params;
+  const [messages, setMessages] = useState([
+    /**
+     * Mock message data
+     */
+    // example of system message
+    {
+      _id: 0,
+      text: 'New room created.',
+      createdAt: new Date().getTime(),
+      system: true,
+    },
+    // example of chat message
+    {
+      _id: 1,
+      text: 'Henlo!',
+      createdAt: new Date().getTime(),
+      user: {
+        _id: 2,
+        name: 'Test User',
+      },
+    },
+  ]);
 
   useEffect(() => {
     auth().onAuthStateChanged(userState => {
@@ -30,38 +45,17 @@ export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = () => {
     });
   }, []);
 
-  useEffect(() => {
-    const subscriber = firestore()
-      .collection('messages')
-      .orderBy('date', 'desc')
-      .limit(5)
-      .onSnapshot(querySnapshot => {
-        const conversations = [];
-
-        querySnapshot.forEach(documentSnapshot => {
-          conversations.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
-        setConversation(conversations);
-        setLoading(false);
-      });
-
-    // Unsubscribe from events when no longer in use
-    return () => subscriber();
-  }, []);
-
-  const sendMessage = async () => {
-    Keyboard.dismiss();
+  const sendMessage = async messages => {
+    const text = messages[0].text;
 
     firestore()
-      .collection('messages')
+      .collection('THREADS')
+      .doc(thread._id)
+      .collection('MESSAGES')
       .add({
-        name: user?.displayName,
-        text: message,
-        date: firestore.Timestamp.now.toString(),
+        name: user?.uid,
+        text,
+        createdAt: new Date().getTime(),
       })
       .then(() => {
         console.log('messages send');
@@ -70,44 +64,16 @@ export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = () => {
 
   return (
     <SafeAreaView style={sharedStyles.container}>
-      <View style={{marginTop: 50}}>
-        <FlatList
-          data={conversations}
-          renderItem={({item}) => (
-            <View
-              style={{
-                height: 50,
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Text>
-                {item.name}:{item.text}
-              </Text>
-            </View>
-          )}
-        />
-        <TextInput
-          style={styles.messageInputField}
-          placeholder="Send Message"
-          value={message}
-          onChangeText={text => setMessage(text)}></TextInput>
-        <Button title="Send Message" onPress={sendMessage} />
-      </View>
-      <View style={{marginTop: 50}}></View>
+      <GiftedChat
+        messages={messages}
+        onSend={newMessage => sendMessage(newMessage)}
+        user={{_id: 1}}
+        placeholder="Start chatting..."
+        showUserAvatar
+        alwaysShowSend
+      />
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  messageInputField: {
-    fontWeight: '300',
-    borderWidth: 1,
-    borderColor: Colors.white,
-    backgroundColor: Colors.white,
-    padding: 8,
-    borderRadius: 5,
-    marginTop: 8,
-    fontSize: 16,
-  },
-});
+const styles = StyleSheet.create({});
