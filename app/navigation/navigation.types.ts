@@ -8,6 +8,7 @@ export type RootStackParamList = {
 export type AppStackNavigatorParamList = {
   ChatRoom: undefined;
   Home: undefined;
+  AddRoom: undefined;
 };
 
 export type AuthStackNavigatorParamList = {

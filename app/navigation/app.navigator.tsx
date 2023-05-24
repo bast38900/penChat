@@ -3,7 +3,7 @@ import {
   StackCardInterpolationProps,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {ChatRoomScreen, HomeScreen} from '../screens/';
+import {ChatRoomScreen, HomeScreen, AddRoomScreen} from '../screens/';
 import {Colors} from '../assets/styles';
 import {AppStackNavigatorParamList} from '../navigation/';
 
@@ -34,6 +34,11 @@ export const AppNavigator = () => {
         name="Home"
         component={HomeScreen}
         options={{cardStyleInterpolator: forFade, headerTitle: 'penChat'}}
+      />
+      <Stack.Screen
+        name="AddRoom"
+        component={AddRoomScreen}
+        options={{headerTitle: 'penChat'}}
       />
       <Stack.Screen
         name="ChatRoom"
