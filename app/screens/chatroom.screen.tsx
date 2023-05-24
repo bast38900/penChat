@@ -12,11 +12,7 @@ import {sharedStyles, Colors} from '../assets/styles';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {TextInput} from 'react-native-gesture-handler';
-
-/**
- * Define types of chatroomScreen parameters
- */
-interface ChatRoomScreenProps {}
+import {AppStackScreenProps} from '../navigation/navigation.types';
 
 /**
  * Perform Sign Out
@@ -39,8 +35,7 @@ async function onGoogleButtonPress() {
 //     });
 //   });
 
-export const ChatRoomScreen: FC<ChatRoomScreenProps> = props => {
-  const {} = props;
+export const ChatRoomScreen: React.FC<AppStackScreenProps<'ChatRoom'>> = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [message, setMessage] = useState('');

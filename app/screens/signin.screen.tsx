@@ -9,11 +9,7 @@ import {
   GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
-
-/**
- * Define types of SigninScreen parameters
- */
-interface SigninScreenProps {}
+import {AuthStackScreenProps} from '../navigation/navigation.types';
 
 /**
  * Set webclient id to firebase app
@@ -48,9 +44,7 @@ async function onGoogleButtonPress() {
     .then(() => console.log('User signed in with Google!'));
 }
 
-export const SignInScreen: FC<SigninScreenProps> = props => {
-  const {} = props;
-
+export const SignInScreen: React.FC<AuthStackScreenProps<'SignIn'>> = () => {
   return (
     <View style={styles.container}>
       <GoogleSigninButton

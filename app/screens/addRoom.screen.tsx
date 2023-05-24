@@ -3,16 +3,11 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Button} from '../components';
 import {useNavigation} from '@react-navigation/native';
 import {Colors} from '../assets/styles';
+import {AppStackScreenProps} from '../navigation/navigation.types';
 
-/**
- * Define types of HomeScreen parameters
- */
-interface AddRoomScreenProps {}
-
-export const AddRoomScreen: FC<AddRoomScreenProps> = props => {
-  const {} = props;
-  const navigation = useNavigation();
-
+export const AddRoomScreen: React.FC<AppStackScreenProps<'AddRoom'>> = ({
+  navigation,
+}) => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Create a new chat room</Text>

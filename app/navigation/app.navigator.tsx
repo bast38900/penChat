@@ -5,9 +5,9 @@ import {
 } from '@react-navigation/stack';
 import {ChatRoomScreen, HomeScreen, AddRoomScreen} from '../screens/';
 import {Colors} from '../assets/styles';
-import {AppStackNavigatorParamList} from '../navigation/';
+import {AppStackParamList} from '../navigation/';
 
-const Stack = createStackNavigator<AppStackNavigatorParamList>();
+const Stack = createStackNavigator<AppStackParamList>();
 
 /**
  * Fade effect used by Navigator

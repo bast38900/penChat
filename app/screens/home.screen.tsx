@@ -4,11 +4,7 @@ import {sharedStyles, Colors} from '../assets/styles';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
 import {Button} from '../components';
-
-/**
- * Define types of chatroomScreen parameters
- */
-interface HomeScreenProps {}
+import {AppStackScreenProps} from '../navigation/navigation.types';
 
 /**
  * Perform Sign Out
@@ -19,10 +15,9 @@ async function onGoogleButtonPress() {
     .then(() => console.log('User signed out!'));
 }
 
-export const HomeScreen: FC<HomeScreenProps> = props => {
-  const {} = props;
-  const navigation = useNavigation();
-
+export const HomeScreen: React.FC<AppStackScreenProps<'Home'>> = ({
+  navigation,
+}) => {
   return (
     <SafeAreaView style={sharedStyles.container}>
       <View style={{marginTop: 50}}>
