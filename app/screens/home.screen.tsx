@@ -2,7 +2,6 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import React, {FC} from 'react';
 import {sharedStyles, Colors} from '../assets/styles';
 import auth from '@react-native-firebase/auth';
-import {useNavigation} from '@react-navigation/native';
 import {Button} from '../components';
 import {AppStackScreenProps} from '../navigation/navigation.types';
 

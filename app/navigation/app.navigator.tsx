@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import React from 'react';
 import {
   StackCardInterpolationProps,
@@ -34,9 +35,7 @@ export const AppNavigator = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{
-          cardStyleInterpolator: forFade,
-          headerTitle: 'penChat',
+        options={({navigation}) => ({
           headerRight: () => (
             <IconButton
               icon="message-plus"
@@ -45,18 +44,17 @@ export const AppNavigator = () => {
               onPress={() => navigation.navigate('AddRoom')}
             />
           ),
-        }}
+          presentation: 'modal',
+          headerTitle: 'PenChat',
+          cardStyleInterpolator: forFade,
+        })}
       />
       <Stack.Screen
         name="AddRoom"
         component={AddRoomScreen}
-        options={{headerTitle: 'penChat'}}
+        options={{headerShown: false}}
       />
-      <Stack.Screen
-        name="ChatRoom"
-        component={ChatRoomScreen}
-        options={{cardStyleInterpolator: forFade}}
-      />
+      <Stack.Screen name="ChatRoom" component={ChatRoomScreen} />
     </Stack.Navigator>
   );
 };
