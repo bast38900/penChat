@@ -14,28 +14,7 @@ import firestore from '@react-native-firebase/firestore';
 import {TextInput} from 'react-native-gesture-handler';
 import {AppStackScreenProps} from '../navigation/navigation.types';
 
-/**
- * Perform Sign Out
- */
-async function onGoogleButtonPress() {
-  auth()
-    .signOut()
-    .then(() => console.log('User signed out!'));
-}
-
-// RETRIEVING USERS //
-// firestore()
-//   .collection('users')
-//   .get()
-//   .then(querySnapshot => {
-//     console.log('Total users: ', querySnapshot.size);
-//
-//     querySnapshot.forEach(documentSnapshot => {
-//       console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
-//     });
-//   });
-
-export const ChatRoomScreen: React.FC<AppStackScreenProps<'ChatRoom'>> = () => {
+export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [message, setMessage] = useState('');
@@ -115,9 +94,7 @@ export const ChatRoomScreen: React.FC<AppStackScreenProps<'ChatRoom'>> = () => {
           onChangeText={text => setMessage(text)}></TextInput>
         <Button title="Send Message" onPress={sendMessage} />
       </View>
-      <View style={{marginTop: 50}}>
-        <Button title="Google Sign-Out" onPress={() => onGoogleButtonPress()} />
-      </View>
+      <View style={{marginTop: 50}}></View>
     </SafeAreaView>
   );
 };
