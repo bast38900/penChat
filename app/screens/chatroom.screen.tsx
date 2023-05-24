@@ -1,4 +1,4 @@
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {Keyboard, SafeAreaView, StyleSheet} from 'react-native';
 import React, {FC, useEffect, useState} from 'react';
 import {sharedStyles} from '../assets/styles';
 import {AppStackScreenProps} from '../navigation/navigation.types';
@@ -47,6 +47,7 @@ export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = ({
   }, []);
 
   const sendMessage = async messages => {
+    Keyboard.dismiss();
     const text = messages[0].text;
 
     firestore()
