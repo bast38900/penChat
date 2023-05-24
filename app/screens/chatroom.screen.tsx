@@ -12,6 +12,7 @@ export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const {thread} = route.params;
+  const [conversations, setConversation] = useState([]);
   const [messages, setMessages] = useState([
     /**
      * Mock message data
@@ -53,21 +54,50 @@ export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = ({
       .doc(thread._id)
       .collection('MESSAGES')
       .add({
-        name: user?.uid,
+        _id: Math.random(),
         text,
         createdAt: new Date().getTime(),
+        user: {
+          _id: user?.uid,
+          name: user?.displayName,
+        },
       })
       .then(() => {
         console.log('messages send');
       });
   };
 
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('THREADS')
+      .doc(thread._id)
+      .collection('MESSAGES')
+      .orderBy('createdAt', 'desc')
+      .limit(50)
+      .onSnapshot(querySnapshot => {
+        const conversations = [];
+
+        querySnapshot.forEach(documentSnapshot => {
+          conversations.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
+
+        setConversation(conversations);
+        setLoading(false);
+      });
+
+    // Unsubscribe from events when no longer in use
+    return () => subscriber();
+  }, []);
+
   return (
     <SafeAreaView style={sharedStyles.container}>
       <GiftedChat
-        messages={messages}
-        onSend={newMessage => sendMessage(newMessage)}
-        user={{_id: 1}}
+        messages={conversations}
+        onSend={sendMessage}
+        user={{_id: user?.uid}}
         placeholder="Start chatting..."
         showUserAvatar
         alwaysShowSend
