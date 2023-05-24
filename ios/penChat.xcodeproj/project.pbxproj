@@ -38,6 +38,22 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = penChat/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = penChat/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-penChat-penChatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-penChat-penChatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		280EE3542A1E2C1D00825B28 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		280EE3552A1E2C1D00825B28 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		280EE3562A1E2C1D00825B28 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		280EE3572A1E2C1D00825B28 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		280EE3582A1E2C1D00825B28 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		280EE3592A1E2C1D00825B28 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		280EE35A2A1E2C1D00825B28 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		280EE35B2A1E2C1D00825B28 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		280EE35C2A1E2C1D00825B28 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		280EE35D2A1E2C1D00825B28 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		280EE35E2A1E2C1D00825B28 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		280EE35F2A1E2C1D00825B28 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		280EE3602A1E2C1D00825B28 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		280EE3612A1E2C1D00825B28 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		280EE3622A1E2C1D00825B28 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		280EE3632A1E2C1D00825B28 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		28DA2F3B2A178603004AB6C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-penChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-penChat.debug.xcconfig"; path = "Target Support Files/Pods-penChat/Pods-penChat.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-penChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-penChat.release.xcconfig"; path = "Target Support Files/Pods-penChat/Pods-penChat.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				28DA2F3B2A178603004AB6C3 /* GoogleService-Info.plist */,
+				280EE3532A1E2C1D00825B28 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -97,6 +114,30 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = penChat;
+			sourceTree = "<group>";
+		};
+		280EE3532A1E2C1D00825B28 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				280EE3542A1E2C1D00825B28 /* Fontisto.ttf */,
+				280EE3552A1E2C1D00825B28 /* Octicons.ttf */,
+				280EE3562A1E2C1D00825B28 /* Feather.ttf */,
+				280EE3572A1E2C1D00825B28 /* Entypo.ttf */,
+				280EE3582A1E2C1D00825B28 /* FontAwesome5_Brands.ttf */,
+				280EE3592A1E2C1D00825B28 /* MaterialCommunityIcons.ttf */,
+				280EE35A2A1E2C1D00825B28 /* AntDesign.ttf */,
+				280EE35B2A1E2C1D00825B28 /* Foundation.ttf */,
+				280EE35C2A1E2C1D00825B28 /* Ionicons.ttf */,
+				280EE35D2A1E2C1D00825B28 /* FontAwesome5_Solid.ttf */,
+				280EE35E2A1E2C1D00825B28 /* FontAwesome5_Regular.ttf */,
+				280EE35F2A1E2C1D00825B28 /* FontAwesome.ttf */,
+				280EE3602A1E2C1D00825B28 /* Zocial.ttf */,
+				280EE3612A1E2C1D00825B28 /* EvilIcons.ttf */,
+				280EE3622A1E2C1D00825B28 /* SimpleLineIcons.ttf */,
+				280EE3632A1E2C1D00825B28 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {

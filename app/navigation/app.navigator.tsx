@@ -6,6 +6,7 @@ import {
 import {ChatRoomScreen, HomeScreen, AddRoomScreen} from '../screens/';
 import {Colors} from '../assets/styles';
 import {AppStackParamList} from '../navigation/';
+import {IconButton} from 'react-native-paper';
 
 const Stack = createStackNavigator<AppStackParamList>();
 
@@ -33,7 +34,18 @@ export const AppNavigator = () => {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{cardStyleInterpolator: forFade, headerTitle: 'penChat'}}
+        options={{
+          cardStyleInterpolator: forFade,
+          headerTitle: 'penChat',
+          headerRight: () => (
+            <IconButton
+              icon="message-plus"
+              size={28}
+              iconColor="#ffffff"
+              onPress={() => navigation.navigate('AddRoom')}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="AddRoom"
