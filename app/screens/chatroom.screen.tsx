@@ -35,7 +35,7 @@ async function onGoogleButtonPress() {
 //     });
 //   });
 
-export const ChatRoomScreen: FC<AppStackScreenProps<'ChatRoom'>> = () => {
+export const ChatRoomScreen: React.FC<AppStackScreenProps<'ChatRoom'>> = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [message, setMessage] = useState('');
