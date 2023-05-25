@@ -13,12 +13,12 @@ Resources used:
 
 # Tasklist:
 
-Splash screen: - Done 100%
-Login screen: - Done 100%
-Chat rooms: - Description only implemented as hardcoded, No sorting on new messages, No chevron icon
-Open chat room: - Upload Picture not implemented due to missing ressources
-Send and receive messages: - Done 100%
-Push functionality: - Not implemented due to missing ressources
+- Splash screen: Done 100%
+- Login screen: Done 100%
+- Chat rooms: Description only implemented as hardcoded, No sorting on new messages, No chevron icon
+- Open chat room: Upload Picture not implemented due to missing ressources
+- Send and receive messages: Done 100%
+- Push functionality: Not implemented due to missing ressources
 
 # Effort:
 
@@ -34,6 +34,7 @@ Worktime: 5 1/2 days = 44 Hours
 
 # Dependencies
 
+```
 Firestore:
 "@react-native-firebase/app": "^17.5.0",
 "@react-native-firebase/auth": "^17.5.0",
@@ -59,9 +60,11 @@ UIAndElements:
 "react-native-safe-area-context": "^4.5.2",
 "react-native-splash-screen": "^3.3.0",
 "react-native-vector-icons": "^9.2.0"
+```
 
 # NavigationFlow
 
+```
 <RootNavigator>
 	<AuthStackNavigator>
 		{SignUpScreen}
@@ -69,6 +72,7 @@ UIAndElements:
 		{HomeScreen}
 			{AddRoomScreen}
 			{ChatRoomScreen}
+```
 
 # Recommended future improvements
 
