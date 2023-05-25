@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "176478441703",
+    "project_id": "penchat-7ed69",
+    "storage_bucket": "penchat-7ed69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176478441703:android:ead1a6c3873b2fa82b9242",
+        "android_client_info": {
+          "package_name": "com.penchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176478441703-c749oai4oe5lg636ken7h445m4kbtnuj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.penchat",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "176478441703-3ntq32ecmabh3o7d6bmqivtcr1p5qfpa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6yrSyBmyF6L40TNACPQv7iY5Nndbo2Yw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176478441703-3ntq32ecmabh3o7d6bmqivtcr1p5qfpa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "176478441703-0tc5dvqq0kecg0jjphm7cs55a4iatge4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.penChat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
