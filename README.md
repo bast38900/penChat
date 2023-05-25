@@ -104,6 +104,8 @@ $ npx react-native start
 $ npx react-native run-ios
 $ npx react-native run-android
 ```
+		
+# OBS - Facebook login is enabled, but login is unavailable until the app, has been reviewed by Facebook
 
 ### Questions?
 
