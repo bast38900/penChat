@@ -1,17 +1,16 @@
-/**
- * Screen for login in to application
- */
 import React, {FC} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import {
   GoogleSignin,
   GoogleSigninButton,
+  NativeModuleError,
+  statusCodes,
 } from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import {AuthStackScreenProps} from '../navigation/navigation.types';
 import {Button} from '../components';
-import {sharedStyles, Colors} from '../assets/styles';
+import {Colors} from '../assets/styles';
 import {LoginManager, AccessToken} from 'react-native-fbsdk-next';
 
 /**
@@ -26,25 +25,43 @@ GoogleSignin.configure({
  * Perform Google Sign In
  */
 async function onGoogleButtonPress() {
-  // Check if your device supports Google Play
-  await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-  // Get the users ID token
-  const {idToken, user} = await GoogleSignin.signIn();
+  try {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    // Get the users ID token
+    const {idToken, user} = await GoogleSignin.signIn();
 
-  // Create a Google credential with the token
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-  // Add user to firestore
-  firestore().collection('users').doc(user.id).set({
-    name: user.name,
-    email: user.email,
-    id: user.id,
-  });
+    // Add user to firestore
+    firestore().collection('users').doc(user.id).set({
+      name: user.name,
+      email: user.email,
+      id: user.id,
+    });
 
-  // Sign-in the user with the credential
-  return auth()
-    .signInWithCredential(googleCredential)
-    .then(() => console.log('User signed in with Google!'));
+    // Sign-in the user with the credential
+    return auth()
+      .signInWithCredential(googleCredential)
+      .then(() => console.log('User signed in with Google!'));
+
+    // Error handling
+  } catch (err) {
+    const error = err as NativeModuleError;
+    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+      console.log('User cancelled login');
+      Alert.alert('User cancelled login');
+    } else if (error.code === statusCodes.IN_PROGRESS) {
+      console.log('Login already in progress');
+    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+      console.log('Play services not available');
+      Alert.alert('Google Play services not available');
+    } else {
+      console.log('Something went wrong', error);
+      Alert.alert(`${error.code}: ${error.message}`);
+    }
+  }
 }
 
 /**
@@ -64,6 +81,7 @@ async function onFacebookButtonPress() {
   // Once signed in, get the users AccesToken
   const data = await AccessToken.getCurrentAccessToken();
 
+  // Error Handling
   if (!data) {
     throw 'Something went wrong obtaining access token';
   }
@@ -79,6 +97,9 @@ async function onFacebookButtonPress() {
     .then(() => console.log('User signed in with Facebook!'));
 }
 
+/**
+ * Screen to sign in, pops up when a user is not registred.
+ */
 export const SignInScreen: FC<AuthStackScreenProps<'SignIn'>> = () => {
   return (
     <View style={styles.container}>

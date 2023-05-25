@@ -11,6 +11,9 @@ import {
 } from 'react-native';
 import {Colors} from '../assets/styles';
 
+/**
+ * Define types of Button parameters and methods
+ */
 interface ButtonProps {
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
@@ -21,6 +24,9 @@ interface ButtonProps {
   onPress?: () => void;
 }
 
+/**
+ * Button component used within the app for user submitting
+ */
 export const Button: React.FC<ButtonProps> = props => {
   const {style, textStyle, title, color, isLoading, disabled, onPress} = props;
   return (

@@ -6,12 +6,18 @@ import {IconButton, Title} from 'react-native-paper';
 import {sharedStyles, Colors} from '../assets/styles';
 import firestore from '@react-native-firebase/firestore';
 
+/**
+ * Screen for adding new chat rooms
+ */
 export const AddRoomScreen: FC<AppStackScreenProps<'AddRoom'>> = ({
   navigation,
 }) => {
   const [roomName, setRoomName] = useState('');
 
-  async function handleButtonPress() {
+  /**
+   * Function to ad a new chat room
+   */
+  async function AddChatRoom() {
     if (roomName.length > 0) {
       firestore()
         .collection('THREADS')
@@ -44,7 +50,7 @@ export const AddRoomScreen: FC<AppStackScreenProps<'AddRoom'>> = ({
         <Button
           style={styles.ButtonStyle}
           title={'Add Room'}
-          onPress={handleButtonPress}
+          onPress={AddChatRoom}
           disabled={roomName.length === 0}
           textStyle={{
             color: Colors.white,

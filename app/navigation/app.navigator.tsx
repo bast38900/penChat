@@ -30,7 +30,7 @@ async function onGoogleButtonPress() {
 }
 
 /**
- * Stack for signed in users.
+ * Stack with Screens for signed in users.
  */
 export const AppNavigator = () => {
   return (

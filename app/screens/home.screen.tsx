@@ -6,16 +6,21 @@ import {
   View,
 } from 'react-native';
 import React, {FC, useState, useEffect} from 'react';
-import {sharedStyles, Colors} from '../assets/styles';
-import {Button} from '../components';
+import {sharedStyles} from '../assets/styles';
 import {AppStackScreenProps} from '../navigation/navigation.types';
 import firestore from '@react-native-firebase/firestore';
 import {Divider, List} from 'react-native-paper';
 
+/**
+ * Home screen, with collection of chat room
+ */
 export const HomeScreen: FC<AppStackScreenProps<'Home'>> = ({navigation}) => {
   const [threads, setThreads] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  /**
+   * Function to collect chat rooms, real time
+   */
   useEffect(() => {
     const subscriber = firestore()
       .collection('THREADS')
@@ -58,16 +63,6 @@ export const HomeScreen: FC<AppStackScreenProps<'Home'>> = ({navigation}) => {
               />
             </TouchableOpacity>
           )}
-        />
-        <Button
-          style={styles.ButtonStyle}
-          title={'Add New Room'}
-          onPress={() => navigation.navigate('AddRoom')}
-          textStyle={{
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: '700',
-          }}
         />
       </View>
     </SafeAreaView>

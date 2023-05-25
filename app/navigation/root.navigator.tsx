@@ -12,6 +12,9 @@ import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
+/**
+ * Root Navigator for handling navigation through the application
+ */
 export const RootNavigator = () => {
   const navigationRef = createNavigationContainerRef<RootStackParamList>();
   const [loading, setLoading] = useState<boolean>(true);

@@ -2,6 +2,9 @@ import React from 'react';
 import {StyleSheet, Dimensions, Text} from 'react-native';
 import {TextInput} from 'react-native-paper';
 
+/**
+ * Define types of TextFormInput parameters and methods
+ */
 interface TextFormInputProps {
   labelName: string;
   value: string;
@@ -10,6 +13,9 @@ interface TextFormInputProps {
 
 const {width, height} = Dimensions.get('screen');
 
+/**
+ * TextFormInput component, for user input within the app
+ */
 export const TextFormInput: React.FC<TextFormInputProps> = props => {
   const {labelName, value, onChangeText} = props;
   return (

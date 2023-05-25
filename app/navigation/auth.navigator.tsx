@@ -18,7 +18,7 @@ const forFade = ({current}: StackCardInterpolationProps) => ({
 });
 
 /**
- * Stack for not signed in users.
+ * Stack with Screens for not signed in users.
  */
 export const AuthNavigator = () => {
   return (
